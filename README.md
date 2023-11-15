@@ -22,7 +22,7 @@ monitoring the impact of new code changes on the overall bundle size.
   write) or a repo scoped [PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token). `Required`.
 - **default-branch**: The default branch of the repository
   (e.g., main or master). Default: `main`.
-- **prefix**: The Next.js distribution directory. Default: `.next`.
+- **dist-folder**: The Next.js distribution directory. Default: `.next`.
 - **budget**: The bundle size budget in kilobytes. Default: `200`.
 
 ## Usage
@@ -35,7 +35,7 @@ To use this action in your workflow, add the following step:
   with:
     workflow-id: bundle_analysis.yml
     default-branch: main
-    prefix: .next
+    dist-folder: .next
     budget: 200
     github-token: ${{ secrets.CREATE_OR_UPDATE_COMMENT }}
 ```
