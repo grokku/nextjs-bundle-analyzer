@@ -1,8 +1,6 @@
 import { type FileSizeInfo } from "../steps/get-comparison.js";
 
-interface RowFormatter {
-  (title: string, size: number, delta: number): Array<string>;
-}
+type RowFormatter = (title: string, size: number, delta: number) => Array<string>;
 
 const renderRow = (args: Array<string>) => `| ${args.join(" | ")} |`;
 
