@@ -29,12 +29,13 @@ export const getDeltaSummary = (comparison: ComparisonReport) => {
   const totalBaseSize = pages.size + js.size + css.size;
   const sign = totalDelta < 0 ? "-" : "+";
 
-  const percent =
-    totalDelta && totalBaseSize
-      ? Math.abs((totalDelta / totalBaseSize) * 100)
-      : totalBaseSize
-      ? 0
-      : 100;
+  let percent = 100;
+
+  if (totalDelta && totalBaseSize) {
+    percent = Math.abs((totalDelta / totalBaseSize) * 100);
+  } else if (totalBaseSize) {
+    percent = 0;
+  }
 
   const sizeChangeInPct = totalDelta ? ` (${sign}${percent.toFixed(2)}%)` : "";
 
