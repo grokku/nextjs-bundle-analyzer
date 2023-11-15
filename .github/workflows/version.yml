@@ -1,0 +1,28 @@
+name: Update Major Version Tag
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  update-major-version-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Update Major Version Tag
+        run: |
+          TAG_REF=${GITHUB_REF#refs/tags/}
+          MAJOR_VERSION=$(echo ${TAG_REF} | cut -d. -f1)
+          MAJOR_TAG="v$MAJOR_VERSION"
+          git tag -d $MAJOR_TAG || true
+          git push origin :refs/tags/$MAJOR_TAG || true
+          git tag $MAJOR_TAG $TAG_REF
+          git push origin $MAJOR_TAG
