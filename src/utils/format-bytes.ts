@@ -8,7 +8,6 @@ export const formatBytes = (bytes: number, signed = false) => {
     sign = bytes < 0 ? "-" : "+";
   }
 
-
   if (bytes === 0) return `${sign}0B`;
 
   const i = Math.floor(Math.log(Math.abs(bytes)) / Math.log(kb));
